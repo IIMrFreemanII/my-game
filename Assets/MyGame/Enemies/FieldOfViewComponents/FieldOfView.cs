@@ -11,6 +11,8 @@ namespace MyGame.Enemies.FieldOfViewComponents
         public LayerMask targetMask;
         public LayerMask obstacleMask;
 
+        public int callsPerSecond = 3;
+
         public Transform FindVisibleTarget()
         {
             Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
