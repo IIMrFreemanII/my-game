@@ -41,6 +41,8 @@ namespace MyGame.Enemies.Zombies
         public Transform target;
         public bool isDead;
 
+        public float distanceToTargetCompensator = 0.2f;
+
         private void Awake()
         {
             _fieldOfView = GetComponent<FieldOfView>();
@@ -67,7 +69,7 @@ namespace MyGame.Enemies.Zombies
             Func<bool> CanNotAttack() => () => !canAttack;
 
             Idle idle = new Idle(this, animator, _fieldOfView);
-            MoveToTarget moveToTarget = new MoveToTarget(this, animator, _agent);
+            MoveToTarget moveToTarget = new MoveToTarget(this, _agent);
             Attack attack = new Attack(this, animator, _agent);
 
             AddTransition(idle, moveToTarget, HasTarget());

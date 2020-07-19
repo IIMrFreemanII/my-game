@@ -31,7 +31,7 @@ namespace MyGame.Enemies.Zombies.States
         {
             if (_zombieAi.target)
             {
-                float distanceToTarget = Vector3.Distance(_zombieAi.target.position, _transform.position);
+                float distanceToTarget = Vector3.Distance(_zombieAi.target.position, _transform.position) - _zombieAi.distanceToTargetCompensator;
                 if (distanceToTarget <= _agent.stoppingDistance)
                 {
                     if (!_animator.GetBool("IsFighting")) _animator.SetTrigger("Attack");
