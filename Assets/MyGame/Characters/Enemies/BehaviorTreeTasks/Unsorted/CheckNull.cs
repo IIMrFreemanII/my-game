@@ -1,12 +1,13 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine;
 
 namespace MyGame.Characters.Enemies.BehaviorTreeTasks
 {
     [TaskCategory("ZombieAi/Unsorted")]
     public class CheckNull : Conditional
     {
-        public SharedObject checkedObject;
+        public SharedTransform checkedTransform;
         public Condition condition;
         public enum Condition
         {
@@ -16,12 +17,12 @@ namespace MyGame.Characters.Enemies.BehaviorTreeTasks
         
         public override TaskStatus OnUpdate()
         {
-            if (condition == Condition.Equal && checkedObject == null)
+            if (condition == Condition.Equal && checkedTransform.Value == null)
             {
                 return TaskStatus.Success;
             }
 
-            if (condition == Condition.NotEqual && checkedObject != null)
+            if (condition == Condition.NotEqual && checkedTransform.Value != null)
             {
                 return TaskStatus.Success;
             }
@@ -31,7 +32,7 @@ namespace MyGame.Characters.Enemies.BehaviorTreeTasks
 
         public override void OnReset()
         {
-            checkedObject = null;
+            checkedTransform = null;
             condition = Condition.Equal;
         }
     }

@@ -18,6 +18,7 @@ namespace MyGame.Enemies.BehaviorTreeTasks.Actions
         public SharedInt callsPerSecond = 3;
         
         private Coroutine _chaseCoroutine;
+        private float _distanceCompensator = 0.2f;
 
         public override void OnAwake()
         {
@@ -37,7 +38,7 @@ namespace MyGame.Enemies.BehaviorTreeTasks.Actions
                 return TaskStatus.Failure;
             }
             
-            float distanceToTarget = Vector3.Distance(target.Value.position, transform.position);
+            float distanceToTarget = Vector3.Distance(target.Value.position, transform.position) - _distanceCompensator;
             if (distanceToTarget <= _agent.stoppingDistance) {
                 if (_agent.velocity.sqrMagnitude <= Vector3.zero.sqrMagnitude)
                 {
