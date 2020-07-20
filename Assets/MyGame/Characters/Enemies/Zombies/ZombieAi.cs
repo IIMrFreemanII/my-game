@@ -1,13 +1,15 @@
-﻿using MyGame.Enemies.FieldOfViewComponents;
+﻿using BehaviorDesigner.Runtime;
+using MyGame.Enemies.FieldOfViewComponents;
 using MyGame.Enemies.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace MyGame.Enemies.Zombies
 {
-    [RequireComponent(typeof(FieldOfView))]
     public class ZombieAi : Enemy
     {
+        [SerializeField] private BehaviorTree behaviour;
+        
         [SerializeField] private Animator animator;
 
         private bool _moveToTarget;
@@ -41,10 +43,16 @@ namespace MyGame.Enemies.Zombies
 
         private void Awake()
         {
+            behaviour = GetComponent<BehaviorTree>();
             _fieldOfView = GetComponent<FieldOfView>();
             animator = animator ? animator : GetComponent<Animator>();
             _camera = Camera.main;
             _agent = GetComponent<NavMeshAgent>();
+        }
+
+        public void LogMessage(string message)
+        {
+            behaviour.SendEvent<object>("LogMessage", message);
         }
 
 

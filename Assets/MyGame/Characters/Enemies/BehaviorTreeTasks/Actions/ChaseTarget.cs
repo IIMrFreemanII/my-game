@@ -13,7 +13,6 @@ namespace MyGame.Enemies.BehaviorTreeTasks.Actions
         public SharedFloat distanceToStop;
         
         private NavMeshAgent _agent;
-        private Animator _animator;
         private Vector3 _lastTargetPos;
 
         public SharedInt callsPerSecond = 3;
@@ -23,19 +22,12 @@ namespace MyGame.Enemies.BehaviorTreeTasks.Actions
         public override void OnAwake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
             _agent.stoppingDistance = distanceToStop.Value;
         }
 
         public override void OnStart()
         {
             _chaseCoroutine = Owner.StartCoroutine(ChaseTargetWithDelay());
-            _animator.SetBool("MoveToTarget", true);
-        }
-
-        public override void OnEnd()
-        {
-            _animator.SetBool("MoveToTarget", false);
         }
 
         public override TaskStatus OnUpdate()
