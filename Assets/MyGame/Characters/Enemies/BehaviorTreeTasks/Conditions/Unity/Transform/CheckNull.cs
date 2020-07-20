@@ -1,10 +1,9 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine;
 
 namespace MyGame.Characters.Enemies.BehaviorTreeTasks
 {
-    [TaskCategory("ZombieAi/Unsorted")]
+    [TaskCategory("Unity/Transform")]
     public class CheckNull : Conditional
     {
         public SharedTransform checkedTransform;
