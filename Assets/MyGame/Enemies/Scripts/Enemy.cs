@@ -1,8 +1,8 @@
-﻿using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 namespace MyGame.Enemies.Scripts
 {
-    public abstract class Enemy : SerializedMonoBehaviour
+    public abstract class Enemy : MonoBehaviour
     {
     
     }
