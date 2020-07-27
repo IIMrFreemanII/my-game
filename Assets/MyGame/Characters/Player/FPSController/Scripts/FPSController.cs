@@ -15,7 +15,7 @@ namespace GameComponents.FPSController
         private MovementController _movementController;
         private PlayerInputController _playerInputController;
         
-        [Range(0, 2)] public float rotationSensitivity = 1f;
+        [Range(0, 5)] public float rotationSensitivity = 1f;
 
         private void Awake()
         {

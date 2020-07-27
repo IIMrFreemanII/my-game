@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625114ef92abc6f4d98f906588e93662, type: 3}
+  m_Name: ApplyDamage
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"FlowCanvas.Macros.Macro","nodes":[{"_position":{"x":195.0,"y":180.0},"$type":"FlowCanvas.Macros.MacroInputNode","$id":"0"},{"_position":{"x":600.0,"y":195.0},"$type":"FlowCanvas.Macros.MacroOutputNode","$id":"1"},{"_simplexNode":{},"_position":{"x":405.0,"y":270.0},"$type":"FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.FloatSubtract,
+    ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]","$id":"2"}],"connections":[{"_sourcePortName":"60a4aa08-5d3e-4165-be45-a7de8d5cdfde","_targetPortName":"bbd1c887-6561-4c9b-8666-d6cd3d480b99","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"2c2069c6-d733-4667-99b0-f463f2b618e8","_targetPortName":"a","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"bb743dd3-e0c5-44c4-a86c-2940af901a63","_targetPortName":"b","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"Value","_targetPortName":"6cc7c20f-de41-49e1-b2f9-a8c35c816881","_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"inputDefinitions":[{"_ID":"60a4aa08-5d3e-4165-be45-a7de8d5cdfde","_name":"In","_type":"FlowCanvas.Flow"},{"_ID":"2c2069c6-d733-4667-99b0-f463f2b618e8","_name":"Health","_type":"System.Single"},{"_ID":"bb743dd3-e0c5-44c4-a86c-2940af901a63","_name":"Damage","_type":"System.Single"}],"outputDefinitions":[{"_ID":"bbd1c887-6561-4c9b-8666-d6cd3d480b99","_name":"Out","_type":"FlowCanvas.Flow"},{"_ID":"6cc7c20f-de41-49e1-b2f9-a8c35c816881","_name":"NewHealth","_type":"System.Single"}],"$type":"FlowCanvas.Macros.Macro+DerivedSerializationData"}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.08
+    _category: 
+    _comments: 
+    _translation: {x: 252, y: -72}
+    _zoomFactor: 1
+  _haltSerialization: 0
+  inputDefinitions:
+  - _ID: 60a4aa08-5d3e-4165-be45-a7de8d5cdfde
+    _name: In
+    _type: FlowCanvas.Flow
+  - _ID: 2c2069c6-d733-4667-99b0-f463f2b618e8
+    _name: Health
+    _type: System.Single
+  - _ID: bb743dd3-e0c5-44c4-a86c-2940af901a63
+    _name: Damage
+    _type: System.Single
+  outputDefinitions:
+  - _ID: bbd1c887-6561-4c9b-8666-d6cd3d480b99
+    _name: Out
+    _type: FlowCanvas.Flow
+  - _ID: 6cc7c20f-de41-49e1-b2f9-a8c35c816881
+    _name: NewHealth
+    _type: System.Single
+#---GRAPH_START---
+#The pretty formatted json serialization bellow is only a reference to help in version control diff. Other than that it is not used at all.
+#{
+#    "type": "FlowCanvas.Macros.Macro",
+#    "nodes": [
+#        {
+#            "_position": {
+#                "x": 195.0,
+#                "y": 180.0
+#            },
+#            "$type": "FlowCanvas.Macros.MacroInputNode",
+#            "$id": "0"
+#        },
+#        {
+#            "_position": {
+#                "x": 600.0,
+#                "y": 195.0
+#            },
+#            "$type": "FlowCanvas.Macros.MacroOutputNode",
+#            "$id": "1"
+#        },
+#        {
+#            "_simplexNode": {
+#
+#            },
+#            "_position": {
+#                "x": 405.0,
+#                "y": 270.0
+#            },
+#            "$type": "FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.FloatSubtract, ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+#            "$id": "2"
+#        }
+#    ],
+#    "connections": [
+#        {
+#            "_sourcePortName": "60a4aa08-5d3e-4165-be45-a7de8d5cdfde",
+#            "_targetPortName": "bbd1c887-6561-4c9b-8666-d6cd3d480b99",
+#            "_sourceNode": {
+#                "$ref": "0"
+#            },
+#            "_targetNode": {
+#                "$ref": "1"
+#            },
+#            "$type": "FlowCanvas.BinderConnection"
+#        },
+#        {
+#            "_sourcePortName": "2c2069c6-d733-4667-99b0-f463f2b618e8",
+#            "_targetPortName": "a",
+#            "_sourceNode": {
+#                "$ref": "0"
+#            },
+#            "_targetNode": {
+#                "$ref": "2"
+#            },
+#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#        },
+#        {
+#            "_sourcePortName": "bb743dd3-e0c5-44c4-a86c-2940af901a63",
+#            "_targetPortName": "b",
+#            "_sourceNode": {
+#                "$ref": "0"
+#            },
+#            "_targetNode": {
+#                "$ref": "2"
+#            },
+#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#        },
+#        {
+#            "_sourcePortName": "Value",
+#            "_targetPortName": "6cc7c20f-de41-49e1-b2f9-a8c35c816881",
+#            "_sourceNode": {
+#                "$ref": "2"
+#            },
+#            "_targetNode": {
+#                "$ref": "1"
+#            },
+#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#        }
+#    ],
+#    "canvasGroups": [],
+#    "localBlackboard": {
+#        "_variables": {
+#
+#        }
+#    },
+#    "derivedData": {
+#        "inputDefinitions": [
+#            {
+#                "_ID": "60a4aa08-5d3e-4165-be45-a7de8d5cdfde",
+#                "_name": "In",
+#                "_type": "FlowCanvas.Flow"
+#            },
+#            {
+#                "_ID": "2c2069c6-d733-4667-99b0-f463f2b618e8",
+#                "_name": "Health",
+#                "_type": "System.Single"
+#            },
+#            {
+#                "_ID": "bb743dd3-e0c5-44c4-a86c-2940af901a63",
+#                "_name": "Damage",
+#                "_type": "System.Single"
+#            }
+#        ],
+#        "outputDefinitions": [
+#            {
+#                "_ID": "bbd1c887-6561-4c9b-8666-d6cd3d480b99",
+#                "_name": "Out",
+#                "_type": "FlowCanvas.Flow"
+#            },
+#            {
+#                "_ID": "6cc7c20f-de41-49e1-b2f9-a8c35c816881",
+#                "_name": "NewHealth",
+#                "_type": "System.Single"
+#            }
+#        ],
+#        "$type": "FlowCanvas.Macros.Macro+DerivedSerializationData"
+#    }
+#}
+#---GRAPH_END---

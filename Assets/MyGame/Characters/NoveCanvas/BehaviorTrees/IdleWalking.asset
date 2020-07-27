@@ -1,0 +1,333 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a686a47eee2fa44cb0a34b5d86e4d5e, type: 3}
+  m_Name: IdleWalking
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_position":{"x":675.0},"$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"0"},{"repeaterMode":2,"repeatTimes":{"_value":1},"_position":{"x":540.0,"y":105.0},"$type":"NodeCanvas.BehaviourTrees.Repeater","$id":"1"},{"_position":{"x":540.0,"y":195.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"2"},{"_action":{"waitTime":{"_name":"delayRandomMove","_targetVariableID":"49a39d4b-383b-4063-8d47-195b33fc450f"},"$type":"NodeCanvas.Tasks.Actions.Wait"},"_position":{"x":345.0,"y":315.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"3"},{"_flowScript":{"_value":1},"_position":{"x":600.0,"y":315.0},"$type":"NodeCanvas.BehaviourTrees.BTNestedFlowScript","$id":"4"},{"repeaterMode":2,"repeatTimes":{"_value":1},"_position":{"x":945.0,"y":105.0},"$type":"NodeCanvas.BehaviourTrees.Repeater","$id":"5"},{"_position":{"x":945.0,"y":240.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"6"},{"_condition":{"valueA":{"_name":"Target","_targetVariableID":"c57e5821-96f3-4ebd-afe7-8c6f800622db"},"valueB":{},"$type":"NodeCanvas.Tasks.Conditions.CheckVariable`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"_position":{"x":810.0,"y":360.0},"$type":"NodeCanvas.BehaviourTrees.ConditionalEvaluator","$id":"7"},{"_action":{"actions":[{"waitTime":{"_value":0.5},"$type":"NodeCanvas.Tasks.Actions.Wait"},{"layerMask":{"value":256},"radius":{"_name":"MaxSeeDistance","_targetVariableID":"7220e3a4-c61b-4ba4-97ef-34185c55ab79"},"saveObjectsAs":{"_name":"Targets","_targetVariableID":"1b43cc2c-2259-4311-b551-35235918e410"},"$type":"NodeCanvas.Tasks.Actions.GetOverlapSphereObjects"},{"list":{"_name":"Targets","_targetVariableID":"1b43cc2c-2259-4311-b551-35235918e410"},"saveAs":{"_name":"ClosestTarget","_targetVariableID":"718bfc93-4231-4389-9c41-62250030c252"},"$type":"NodeCanvas.Tasks.Actions.GetCloserGameObjectInList"}],"$type":"NodeCanvas.Framework.ActionList"},"_position":{"x":705.0,"y":510.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"8"},{"_condition":{"target":{"_name":"ClosestTarget","_targetVariableID":"718bfc93-4231-4389-9c41-62250030c252"},"maxDistance":{"_name":"MaxSeeDistance","_targetVariableID":"7220e3a4-c61b-4ba4-97ef-34185c55ab79"},"awarnessDistance":{},"viewAngle":{"_name":"ViewAngle","_targetVariableID":"bcb36280-3ac9-4997-b0de-08ccace33535"},"offset":{"y":1.7},"$type":"NodeCanvas.Tasks.Conditions.CanSeeTarget"},"_position":{"x":1050.0,"y":360.0},"$type":"NodeCanvas.BehaviourTrees.ConditionalEvaluator","$id":"9"},{"_action":{"valueA":{"_name":"Target","_targetVariableID":"c57e5821-96f3-4ebd-afe7-8c6f800622db"},"valueB":{"_name":"ClosestTarget","_targetVariableID":"718bfc93-4231-4389-9c41-62250030c252"},"$type":"NodeCanvas.Tasks.Actions.SetVariable`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"_position":{"x":1050.0,"y":480.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"10"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"9"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"7"},"_targetNode":{"$ref":"8"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"10"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{"Targets":{"_value":[],"_name":"Targets","_id":"1b43cc2c-2259-4311-b551-35235918e410","$type":"NodeCanvas.Framework.Variable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"ClosestTarget":{"_name":"ClosestTarget","_id":"718bfc93-4231-4389-9c41-62250030c252","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _objectReferences:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: c466bfc4f9a6c244a8b039ed51adcfc4, type: 2}
+  _graphSource:
+    _version: 3.08
+    _category: 
+    _comments: 
+    _translation: {x: 9, y: -127}
+    _zoomFactor: 0.8233271
+  _haltSerialization: 0
+#---GRAPH_START---
+#The pretty formatted json serialization bellow is only a reference to help in version control diff. Other than that it is not used at all.
+#{
+#    "type": "NodeCanvas.BehaviourTrees.BehaviourTree",
+#    "nodes": [
+#        {
+#            "_position": {
+#                "x": 675.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.Parallel",
+#            "$id": "0"
+#        },
+#        {
+#            "repeaterMode": 2,
+#            "repeatTimes": {
+#                "_value": 1
+#            },
+#            "_position": {
+#                "x": 540.0,
+#                "y": 105.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.Repeater",
+#            "$id": "1"
+#        },
+#        {
+#            "_position": {
+#                "x": 540.0,
+#                "y": 195.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.Sequencer",
+#            "$id": "2"
+#        },
+#        {
+#            "_action": {
+#                "waitTime": {
+#                    "_name": "delayRandomMove",
+#                    "_targetVariableID": "49a39d4b-383b-4063-8d47-195b33fc450f"
+#                },
+#                "$type": "NodeCanvas.Tasks.Actions.Wait"
+#            },
+#            "_position": {
+#                "x": 345.0,
+#                "y": 315.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+#            "$id": "3"
+#        },
+#        {
+#            "_flowScript": {
+#                "_value": 1
+#            },
+#            "_position": {
+#                "x": 600.0,
+#                "y": 315.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTNestedFlowScript",
+#            "$id": "4"
+#        },
+#        {
+#            "repeaterMode": 2,
+#            "repeatTimes": {
+#                "_value": 1
+#            },
+#            "_position": {
+#                "x": 945.0,
+#                "y": 105.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.Repeater",
+#            "$id": "5"
+#        },
+#        {
+#            "_position": {
+#                "x": 945.0,
+#                "y": 240.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.Sequencer",
+#            "$id": "6"
+#        },
+#        {
+#            "_condition": {
+#                "valueA": {
+#                    "_name": "Target",
+#                    "_targetVariableID": "c57e5821-96f3-4ebd-afe7-8c6f800622db"
+#                },
+#                "valueB": {
+#
+#                },
+#                "$type": "NodeCanvas.Tasks.Conditions.CheckVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+#            },
+#            "_position": {
+#                "x": 810.0,
+#                "y": 360.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.ConditionalEvaluator",
+#            "$id": "7"
+#        },
+#        {
+#            "_action": {
+#                "actions": [
+#                    {
+#                        "waitTime": {
+#                            "_value": 0.5
+#                        },
+#                        "$type": "NodeCanvas.Tasks.Actions.Wait"
+#                    },
+#                    {
+#                        "layerMask": {
+#                            "value": 256
+#                        },
+#                        "radius": {
+#                            "_name": "MaxSeeDistance",
+#                            "_targetVariableID": "7220e3a4-c61b-4ba4-97ef-34185c55ab79"
+#                        },
+#                        "saveObjectsAs": {
+#                            "_name": "Targets",
+#                            "_targetVariableID": "1b43cc2c-2259-4311-b551-35235918e410"
+#                        },
+#                        "$type": "NodeCanvas.Tasks.Actions.GetOverlapSphereObjects"
+#                    },
+#                    {
+#                        "list": {
+#                            "_name": "Targets",
+#                            "_targetVariableID": "1b43cc2c-2259-4311-b551-35235918e410"
+#                        },
+#                        "saveAs": {
+#                            "_name": "ClosestTarget",
+#                            "_targetVariableID": "718bfc93-4231-4389-9c41-62250030c252"
+#                        },
+#                        "$type": "NodeCanvas.Tasks.Actions.GetCloserGameObjectInList"
+#                    }
+#                ],
+#                "$type": "NodeCanvas.Framework.ActionList"
+#            },
+#            "_position": {
+#                "x": 705.0,
+#                "y": 510.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+#            "$id": "8"
+#        },
+#        {
+#            "_condition": {
+#                "target": {
+#                    "_name": "ClosestTarget",
+#                    "_targetVariableID": "718bfc93-4231-4389-9c41-62250030c252"
+#                },
+#                "maxDistance": {
+#                    "_name": "MaxSeeDistance",
+#                    "_targetVariableID": "7220e3a4-c61b-4ba4-97ef-34185c55ab79"
+#                },
+#                "awarnessDistance": {
+#
+#                },
+#                "viewAngle": {
+#                    "_name": "ViewAngle",
+#                    "_targetVariableID": "bcb36280-3ac9-4997-b0de-08ccace33535"
+#                },
+#                "offset": {
+#                    "y": 1.7
+#                },
+#                "$type": "NodeCanvas.Tasks.Conditions.CanSeeTarget"
+#            },
+#            "_position": {
+#                "x": 1050.0,
+#                "y": 360.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.ConditionalEvaluator",
+#            "$id": "9"
+#        },
+#        {
+#            "_action": {
+#                "valueA": {
+#                    "_name": "Target",
+#                    "_targetVariableID": "c57e5821-96f3-4ebd-afe7-8c6f800622db"
+#                },
+#                "valueB": {
+#                    "_name": "ClosestTarget",
+#                    "_targetVariableID": "718bfc93-4231-4389-9c41-62250030c252"
+#                },
+#                "$type": "NodeCanvas.Tasks.Actions.SetVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+#            },
+#            "_position": {
+#                "x": 1050.0,
+#                "y": 480.0
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+#            "$id": "10"
+#        }
+#    ],
+#    "connections": [
+#        {
+#            "_sourceNode": {
+#                "$ref": "0"
+#            },
+#            "_targetNode": {
+#                "$ref": "1"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "0"
+#            },
+#            "_targetNode": {
+#                "$ref": "5"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "1"
+#            },
+#            "_targetNode": {
+#                "$ref": "2"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "2"
+#            },
+#            "_targetNode": {
+#                "$ref": "3"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "2"
+#            },
+#            "_targetNode": {
+#                "$ref": "4"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "5"
+#            },
+#            "_targetNode": {
+#                "$ref": "6"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "6"
+#            },
+#            "_targetNode": {
+#                "$ref": "7"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "6"
+#            },
+#            "_targetNode": {
+#                "$ref": "9"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "7"
+#            },
+#            "_targetNode": {
+#                "$ref": "8"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        },
+#        {
+#            "_sourceNode": {
+#                "$ref": "9"
+#            },
+#            "_targetNode": {
+#                "$ref": "10"
+#            },
+#            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+#        }
+#    ],
+#    "canvasGroups": [],
+#    "localBlackboard": {
+#        "_variables": {
+#            "Targets": {
+#                "_value": [],
+#                "_name": "Targets",
+#                "_id": "1b43cc2c-2259-4311-b551-35235918e410",
+#                "$type": "NodeCanvas.Framework.Variable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#            },
+#            "ClosestTarget": {
+#                "_name": "ClosestTarget",
+#                "_id": "718bfc93-4231-4389-9c41-62250030c252",
+#                "$type": "NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+#            }
+#        }
+#    },
+#    "derivedData": {
+#        "repeat": true,
+#        "$type": "NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"
+#    }
+#}
+#---GRAPH_END---
