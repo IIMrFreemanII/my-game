@@ -1,16 +1,22 @@
-﻿using MyGame.Weapons.Projectiles.Scripts;
+﻿using System.Collections;
+using MyGame.Weapons.Projectiles.Scripts;
 using UnityEngine;
 
 namespace MyGame.Weapons.Guns.Scripts
 {
     public class GunController : MonoBehaviour
     {
-        [SerializeField] private Camera camera;
-        [SerializeField] private Transform firePositionTransform;
-        [SerializeField] private Bullet bulletPrefab;
-        public GameObject owner;
-        [SerializeField] private float fireRate;
-
+        [SerializeField] private new Camera camera = null;
+        [SerializeField] private Transform firePositionTransform = null;
+        [SerializeField] private Bullet bulletPrefab = null;
+        
+        [SerializeField] private float fireRate = 1;
+        private float TimeToFire => 1 / fireRate;
+        
+        public GameObject owner = null;
+        
+        private Coroutine _fireCoroutine;
+        
         private void Awake()
         {
             camera = camera ? camera : Camera.main;
@@ -37,7 +43,33 @@ namespace MyGame.Weapons.Guns.Scripts
         {
             if (Input.GetMouseButtonDown(0))
             {
-                CreateBullet();
+                if (_fireCoroutine == null)
+                {
+                    _fireCoroutine = StartCoroutine(FireCoroutine());
+                }
+            }
+            
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (_fireCoroutine != null)
+                {
+                    StopCoroutine(_fireCoroutine);
+                    _fireCoroutine = null;
+                }
+            }
+        }
+
+        private void Fire()
+        {
+            CreateBullet();
+        }
+
+        private IEnumerator FireCoroutine()
+        {
+            while (true)
+            {
+                Fire();
+                yield return new WaitForSeconds(TimeToFire);
             }
         }
 

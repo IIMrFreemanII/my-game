@@ -6,7 +6,7 @@ namespace MyGame.Weapons.Projectiles.Scripts
 {
     public class Bullet : Projectile
     {
-        [SerializeField] private SignalDefinition applyDamageSignal;
+        [SerializeField] private SignalDefinition applyDamageSignal = null;
         [SerializeField] private float selfDestroyTime = 5f;
 
         private Vector3 _lastPosition;

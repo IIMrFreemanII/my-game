@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class WeaponAimHandler : MonoBehaviour
 {
-    [SerializeField] private float maxAimDistance;
-    [SerializeField] private LayerMask aimLayer;
-    [SerializeField] private Camera camera;
+    [SerializeField] private float maxAimDistance = 30f;
+    [SerializeField] private LayerMask aimLayer = default;
+    [SerializeField] private new Camera camera = null;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float stopRotationDist = 1f;
 
     private void Awake()
     {
@@ -24,9 +26,13 @@ public class WeaponAimHandler : MonoBehaviour
         
         if (Physics.Raycast(origin, direction, out RaycastHit hit, maxAimDistance, aimLayer))
         {
-            Vector3 directionToTarget = transform.DirectionTo(hit.point);
-            
-            RotateToDirection(directionToTarget);
+            float hitDist = hit.distance;
+
+            if (hitDist >= stopRotationDist)
+            {
+                Vector3 directionToTarget = transform.DirectionTo(hit.point);
+                RotateToDirection(directionToTarget);
+            }
         }
         else
         {
@@ -36,6 +42,8 @@ public class WeaponAimHandler : MonoBehaviour
 
     private void RotateToDirection(Vector3 dirToTarget)
     {
-        transform.forward = dirToTarget;
+        float t = rotationSpeed * Time.deltaTime;
+        Vector3 smoothDir = Vector3.Lerp(transform.forward, dirToTarget, t);
+        transform.forward = smoothDir;
     }
 }
