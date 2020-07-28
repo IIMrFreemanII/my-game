@@ -15,7 +15,7 @@ namespace GameComponents.FPSController
         private MovementController _movementController;
         private PlayerInputController _playerInputController;
         
-        [Range(0, 5)] public float rotationSensitivity = 1f;
+        [Range(0, 5)] public float rotationSensitivity = 3f;
 
         private void Awake()
         {
@@ -42,6 +42,16 @@ namespace GameComponents.FPSController
         private void Update()
         {
             _playerInputController.UpdateInput();
+        }
+
+        private void OnDisable()
+        {
+            ResetCameraParent();
+        }
+
+        private void ResetCameraParent()
+        {
+            camera.transform.SetParent(null);
         }
     }
 }
