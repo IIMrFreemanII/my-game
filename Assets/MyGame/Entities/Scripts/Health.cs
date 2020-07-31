@@ -11,6 +11,7 @@ namespace MyGame.Entities.Scripts
         [SerializeField] private SignalDefinition applyDamageSignal = null;
 
         public event Action<float> OnHealthPercentChanged; 
+        public event Action<float, Vector3> OnDamage; 
         
         private void OnEnable()
         {
@@ -34,12 +35,16 @@ namespace MyGame.Entities.Scripts
                     Die();
                 }
 
-                // value between 0 and 1
-                float normalizedHealth = value / maxHealth;
-                OnHealthPercentChanged?.Invoke(normalizedHealth);
-                
+                HandleHealthPercent(value, maxHealth);
                 _currentHealth = value;
             }
+        }
+
+        private void HandleHealthPercent(float currHealth, float maxHealth)
+        {
+            // value between 0 and 1
+            float normalizedHealth = currHealth / maxHealth;
+            OnHealthPercentChanged?.Invoke(normalizedHealth);
         }
 
         private void OnApplyDamageSignal(Transform sender, Transform receiver, bool isGlobal, object[] args)
@@ -47,12 +52,13 @@ namespace MyGame.Entities.Scripts
             if (receiver != transform) return;
         
             float damage = (float)args[0];
-            ApplyDamage(damage);
+            ApplyDamage(damage, sender.position);
         }
 
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(float damage, Vector3 hitPos)
         {
             CurrentHealth -= damage;
+            OnDamage?.Invoke(damage, hitPos);
         }
 
         private void Die()

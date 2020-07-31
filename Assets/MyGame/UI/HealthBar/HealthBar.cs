@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Extensions;
 using MyGame.Entities.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,8 +60,9 @@ namespace MyGame.UI.HealthBar
         private void LateUpdate()
         {
             if (!rotateToCameraView) return;
-            
-            transform.forward = -camera.transform.forward;
+
+            Vector3 dirToCamera = transform.DirectionTo(camera.transform.position);
+            transform.forward = dirToCamera;
         }
     }
 }
