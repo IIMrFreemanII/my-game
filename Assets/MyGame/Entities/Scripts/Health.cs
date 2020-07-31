@@ -1,17 +1,20 @@
-﻿using NodeCanvas.Framework;
-using TMPro;
+﻿using System;
+using NodeCanvas.Framework;
 using UnityEngine;
 
 namespace MyGame.Entities.Scripts
 {
-    public class HealthController : MonoBehaviour
+    public class Health : MonoBehaviour
     {
-        [SerializeField] private float health = 100f;
+        [SerializeField] private float maxHealth = 100f;
+        private float _currentHealth;
         [SerializeField] private SignalDefinition applyDamageSignal = null;
-        [SerializeField] private TMP_Text healthText = null;
 
+        public event Action<float> OnHealthPercentChanged; 
+        
         private void OnEnable()
         {
+            _currentHealth = maxHealth;
             applyDamageSignal.onInvoke += OnApplyDamageSignal;
         }
 
@@ -20,9 +23,9 @@ namespace MyGame.Entities.Scripts
             applyDamageSignal.onInvoke -= OnApplyDamageSignal;
         }
 
-        public float Health
+        public float CurrentHealth
         {
-            get => health;
+            get => _currentHealth;
         
             private set
             {
@@ -30,12 +33,15 @@ namespace MyGame.Entities.Scripts
                 {
                     Die();
                 }
-            
-                SetUiHealthText(value);
-                health = value;
+
+                // value between 0 and 1
+                float normalizedHealth = value / maxHealth;
+                OnHealthPercentChanged?.Invoke(normalizedHealth);
+                
+                _currentHealth = value;
             }
         }
-    
+
         private void OnApplyDamageSignal(Transform sender, Transform receiver, bool isGlobal, object[] args)
         {
             if (receiver != transform) return;
@@ -46,20 +52,12 @@ namespace MyGame.Entities.Scripts
 
         public void ApplyDamage(float damage)
         {
-            Health -= damage;
+            CurrentHealth -= damage;
         }
 
         private void Die()
         {
             Destroy(gameObject);
-        }
-
-        private void SetUiHealthText(float health)
-        {
-            if (healthText)
-            {
-                healthText.text = $"{health}";
-            }
         }
     }
 }

@@ -43,15 +43,5 @@ namespace GameComponents.FPSController
         {
             _playerInputController.UpdateInput();
         }
-
-        private void OnDisable()
-        {
-            ResetCameraParent();
-        }
-
-        private void ResetCameraParent()
-        {
-            camera.transform.SetParent(null);
-        }
     }
 }

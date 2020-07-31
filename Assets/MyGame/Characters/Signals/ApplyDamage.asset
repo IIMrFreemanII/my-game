@@ -16,3 +16,6 @@ MonoBehaviour:
   - _ID: 38a500ba-49c6-4b59-be52-9262736eaa9d
     _name: Damage
     _type: System.Single
+  - _ID: 72bc84c8-a6aa-4d12-ae5e-d70658e8aa55
+    _name: Owner
+    _type: UnityEngine.Transform

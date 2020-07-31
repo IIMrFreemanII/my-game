@@ -65,7 +65,7 @@ namespace MyGame.Weapons.Projectiles.Scripts
 
         private void ApplyDamageTo(Transform target)
         {
-            applyDamageSignal.Invoke(transform, target, false, damage);
+            applyDamageSignal.Invoke(transform, target, false, damage, owner.transform);
             SelfDestroy();
         }
     }

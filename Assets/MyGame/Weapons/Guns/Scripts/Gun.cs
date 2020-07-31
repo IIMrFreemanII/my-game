@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MyGame.Weapons.Guns.Scripts
 {
-    public class GunController : MonoBehaviour
+    public class Gun : MonoBehaviour
     {
         [SerializeField] private new Camera camera = null;
         [SerializeField] private Transform firePositionTransform = null;

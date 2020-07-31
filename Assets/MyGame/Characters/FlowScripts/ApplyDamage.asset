@@ -12,27 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d31b62ec9d586a4e94389d9071559ca, type: 3}
   m_Name: ApplyDamage
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"FlowCanvas.FlowScript","nodes":[{"_position":{"x":270.0,"y":180.0},"$type":"FlowCanvas.Nodes.EnableEvent","$id":"0"},{"targetVariable":{"_name":"Health","_targetVariableID":"12de0024-edf2-4f9e-85f9-e4521288bc99"},"_position":{"x":615.0,"y":180.0},"$type":"FlowCanvas.Nodes.SetVariable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]","$id":"1"},{"_simplexNode":{},"_position":{"x":810.0,"y":180.0},"$type":"FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.LogValue,
-    ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]","$id":"2"},{"_inputPortValues":{"Success":{"$content":true,"$type":"System.Boolean"}},"_position":{"x":990.0,"y":180.0},"$type":"FlowCanvas.Nodes.Finish","$id":"3"},{"value":{"_name":"Health","_targetVariableID":"12de0024-edf2-4f9e-85f9-e4521288bc99"},"_position":{"x":105.0,"y":285.0},"$type":"FlowCanvas.Nodes.GetVariable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]","$id":"4"},{"_simplexNode":{},"_position":{"x":270.0,"y":300.0},"$type":"FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.FloatSubtract,
-    ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]","$id":"5"},{"value":{"_name":"Damage","_targetVariableID":"4cd1f77c-0cac-4893-94ee-a8e4a5964f27"},"_position":{"x":105.0,"y":360.0},"$type":"FlowCanvas.Nodes.GetVariable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]","$id":"6"}],"connections":[{"_sourcePortName":"Out","_targetPortName":"In","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Out","_targetPortName":"
-    ","_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Value","_targetPortName":"obj","_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"FlowCanvas.BinderConnection`1[[System.Object,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"
-    ","_targetPortName":"In","_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Value","_targetPortName":"a","_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"Value","_targetPortName":"Value","_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"Value","_targetPortName":"b","_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"5"},"$type":"FlowCanvas.BinderConnection`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}],"canvasGroups":[],"localBlackboard":{"_variables":{"Health":{"_name":"Health","_id":"12de0024-edf2-4f9e-85f9-e4521288bc99","_isPublic":true,"$type":"NodeCanvas.Framework.Variable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"Damage":{"_name":"Damage","_id":"4cd1f77c-0cac-4893-94ee-a8e4a5964f27","_isPublic":true,"$type":"NodeCanvas.Framework.Variable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}}'
+  _serializedGraph: '{"type":"FlowCanvas.FlowScript","nodes":[{"updateInterval":{},"_position":{"x":555.0,"y":180.0},"$type":"FlowCanvas.Nodes.UpdateEvent","$id":"0"},{"targetVariable":{"_name":"Target","_targetVariableID":"c57e5821-96f3-4ebd-afe7-8c6f800622db"},"_position":{"x":780.0,"y":180.0},"$type":"FlowCanvas.Nodes.SetVariable`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]","$id":"1"},{"_inputPortValues":{"Success":{"$content":true,"$type":"System.Boolean"}},"_position":{"x":990.0,"y":180.0},"$type":"FlowCanvas.Nodes.Finish","$id":"2"},{"value":{"_name":"Owner","_targetVariableID":"2a3bfbc1-e9ca-48c4-b1db-f22e1e4d28c0"},"_position":{"x":555.0,"y":255.0},"$type":"FlowCanvas.Nodes.GetVariable`1[[UnityEngine.Transform,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]","$id":"3"}],"connections":[{"_sourcePortName":"Out","_targetPortName":"In","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Out","_targetPortName":"In","_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Value","_targetPortName":"Value","_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection`1[[UnityEngine.GameObject,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}],"canvasGroups":[],"localBlackboard":{"_variables":{"Owner":{"_name":"Owner","_id":"2a3bfbc1-e9ca-48c4-b1db-f22e1e4d28c0","_isPublic":true,"$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.08
     _category: 
     _comments: 
-    _translation: {x: 45, y: 87}
-    _zoomFactor: 0.75000733
+    _translation: {x: -228, y: 46}
+    _zoomFactor: 0.749969
   _haltSerialization: 0
 #---GRAPH_START---
 #The pretty formatted json serialization bellow is only a reference to help in version control diff. Other than that it is not used at all.
@@ -40,35 +31,27 @@ MonoBehaviour:
 #    "type": "FlowCanvas.FlowScript",
 #    "nodes": [
 #        {
+#            "updateInterval": {
+#
+#            },
 #            "_position": {
-#                "x": 270.0,
+#                "x": 555.0,
 #                "y": 180.0
 #            },
-#            "$type": "FlowCanvas.Nodes.EnableEvent",
+#            "$type": "FlowCanvas.Nodes.UpdateEvent",
 #            "$id": "0"
 #        },
 #        {
 #            "targetVariable": {
-#                "_name": "Health",
-#                "_targetVariableID": "12de0024-edf2-4f9e-85f9-e4521288bc99"
+#                "_name": "Target",
+#                "_targetVariableID": "c57e5821-96f3-4ebd-afe7-8c6f800622db"
 #            },
 #            "_position": {
-#                "x": 615.0,
+#                "x": 780.0,
 #                "y": 180.0
 #            },
-#            "$type": "FlowCanvas.Nodes.SetVariable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
+#            "$type": "FlowCanvas.Nodes.SetVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]",
 #            "$id": "1"
-#        },
-#        {
-#            "_simplexNode": {
-#
-#            },
-#            "_position": {
-#                "x": 810.0,
-#                "y": 180.0
-#            },
-#            "$type": "FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.LogValue, ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-#            "$id": "2"
 #        },
 #        {
 #            "_inputPortValues": {
@@ -82,42 +65,19 @@ MonoBehaviour:
 #                "y": 180.0
 #            },
 #            "$type": "FlowCanvas.Nodes.Finish",
+#            "$id": "2"
+#        },
+#        {
+#            "value": {
+#                "_name": "Owner",
+#                "_targetVariableID": "2a3bfbc1-e9ca-48c4-b1db-f22e1e4d28c0"
+#            },
+#            "_position": {
+#                "x": 555.0,
+#                "y": 255.0
+#            },
+#            "$type": "FlowCanvas.Nodes.GetVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]",
 #            "$id": "3"
-#        },
-#        {
-#            "value": {
-#                "_name": "Health",
-#                "_targetVariableID": "12de0024-edf2-4f9e-85f9-e4521288bc99"
-#            },
-#            "_position": {
-#                "x": 105.0,
-#                "y": 285.0
-#            },
-#            "$type": "FlowCanvas.Nodes.GetVariable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
-#            "$id": "4"
-#        },
-#        {
-#            "_simplexNode": {
-#
-#            },
-#            "_position": {
-#                "x": 270.0,
-#                "y": 300.0
-#            },
-#            "$type": "FlowCanvas.Nodes.SimplexNodeWrapper`1[[FlowCanvas.Nodes.FloatSubtract, ParadoxNotion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-#            "$id": "5"
-#        },
-#        {
-#            "value": {
-#                "_name": "Damage",
-#                "_targetVariableID": "4cd1f77c-0cac-4893-94ee-a8e4a5964f27"
-#            },
-#            "_position": {
-#                "x": 105.0,
-#                "y": 360.0
-#            },
-#            "$type": "FlowCanvas.Nodes.GetVariable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
-#            "$id": "6"
 #        }
 #    ],
 #    "connections": [
@@ -134,85 +94,35 @@ MonoBehaviour:
 #        },
 #        {
 #            "_sourcePortName": "Out",
-#            "_targetPortName": " ",
-#            "_sourceNode": {
-#                "$ref": "1"
-#            },
-#            "_targetNode": {
-#                "$ref": "2"
-#            },
-#            "$type": "FlowCanvas.BinderConnection"
-#        },
-#        {
-#            "_sourcePortName": "Value",
-#            "_targetPortName": "obj",
-#            "_sourceNode": {
-#                "$ref": "1"
-#            },
-#            "_targetNode": {
-#                "$ref": "2"
-#            },
-#            "$type": "FlowCanvas.BinderConnection`1[[System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
-#        },
-#        {
-#            "_sourcePortName": " ",
 #            "_targetPortName": "In",
 #            "_sourceNode": {
+#                "$ref": "1"
+#            },
+#            "_targetNode": {
 #                "$ref": "2"
 #            },
-#            "_targetNode": {
-#                "$ref": "3"
-#            },
 #            "$type": "FlowCanvas.BinderConnection"
-#        },
-#        {
-#            "_sourcePortName": "Value",
-#            "_targetPortName": "a",
-#            "_sourceNode": {
-#                "$ref": "4"
-#            },
-#            "_targetNode": {
-#                "$ref": "5"
-#            },
-#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
 #        },
 #        {
 #            "_sourcePortName": "Value",
 #            "_targetPortName": "Value",
 #            "_sourceNode": {
-#                "$ref": "5"
+#                "$ref": "3"
 #            },
 #            "_targetNode": {
 #                "$ref": "1"
 #            },
-#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
-#        },
-#        {
-#            "_sourcePortName": "Value",
-#            "_targetPortName": "b",
-#            "_sourceNode": {
-#                "$ref": "6"
-#            },
-#            "_targetNode": {
-#                "$ref": "5"
-#            },
-#            "$type": "FlowCanvas.BinderConnection`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#            "$type": "FlowCanvas.BinderConnection`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"
 #        }
 #    ],
 #    "canvasGroups": [],
 #    "localBlackboard": {
 #        "_variables": {
-#            "Health": {
-#                "_name": "Health",
-#                "_id": "12de0024-edf2-4f9e-85f9-e4521288bc99",
+#            "Owner": {
+#                "_name": "Owner",
+#                "_id": "2a3bfbc1-e9ca-48c4-b1db-f22e1e4d28c0",
 #                "_isPublic": true,
-#                "$type": "NodeCanvas.Framework.Variable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
-#            },
-#            "Damage": {
-#                "_name": "Damage",
-#                "_id": "4cd1f77c-0cac-4893-94ee-a8e4a5964f27",
-#                "_isPublic": true,
-#                "$type": "NodeCanvas.Framework.Variable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+#                "$type": "NodeCanvas.Framework.Variable`1[[UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"
 #            }
 #        }
 #    }
