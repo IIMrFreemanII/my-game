@@ -25,5 +25,10 @@ namespace MyGame.Weapons.DamagePopups.HitDamagePopup
             Vector3 dirToCamera = transform.DirectionTo(_camera.transform.position);
             transform.forward = -dirToCamera;
         }
+
+        public void SelfDestroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }
