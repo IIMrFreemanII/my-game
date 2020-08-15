@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     
     private void OnDisable()
     {
-        ResetWeaponParent();
-        ResetCameraParent();
+        // ResetWeaponParent();
+        // ResetCameraParent();
     }
 
     private void ResetCameraParent()
