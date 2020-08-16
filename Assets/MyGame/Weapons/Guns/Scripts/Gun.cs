@@ -7,11 +7,12 @@ namespace MyGame.Weapons.Guns.Scripts
 {
     public class Gun : Weapon
     {
-        public WeaponAimHandler weaponAimHandler = new WeaponAimHandler();
-        
         [SerializeField] private new Camera camera = null;
         [SerializeField] private Transform firePositionTransform = null;
         [SerializeField] private Bullet bulletPrefab = null;
+        public LayerMask layerToHit;
+        public float maxDistToHit = 100f;
+        
 
         [SerializeField] private float fireRate = 1;
         private float TimeToFire => 1 / fireRate;
@@ -23,10 +24,13 @@ namespace MyGame.Weapons.Guns.Scripts
             camera = camera ? camera : Camera.main;
             collider = collider ? collider : GetComponent<Collider>();
             rb = rb ? rb : GetComponent<Rigidbody>();
-            
-            weaponAimHandler.Init(transform, camera);
 
             SetUpCursor();
+        }
+
+        private void OnValidate()
+        {
+            layerToHit = LayerMask.GetMask("Default", "Enemy");
         }
 
         private void SetUpCursor()
@@ -36,8 +40,6 @@ namespace MyGame.Weapons.Guns.Scripts
 
         public override void HandleFire()
         {
-            weaponAimHandler.Update();
-            
             if (Input.GetMouseButtonDown(0))
             {
                 if (_fireCoroutine == null)
@@ -73,10 +75,24 @@ namespace MyGame.Weapons.Guns.Scripts
         private void CreateBullet()
         {
             Vector3 spawnPosition = firePositionTransform.position;
-            Quaternion spawnRotation = firePositionTransform.rotation;
+            Quaternion spawnRotation = Quaternion.LookRotation(GetDirToTarget());
 
             Bullet bullet = Instantiate(bulletPrefab, spawnPosition, spawnRotation);
             bullet.Initialize(owner);
+        }
+
+        private Vector3 GetDirToTarget()
+        {
+            Vector3 camPos = camera.transform.position;
+            Vector3 camForwardDir = camera.transform.forward;
+            
+            if (Physics.Raycast(camPos, camForwardDir, out RaycastHit hit, maxDistToHit, layerToHit))
+            {
+                Vector3 dirToTarget = (hit.point - firePositionTransform.position).normalized;
+                return dirToTarget;
+            }
+            
+            return camForwardDir;
         }
     }
 }
