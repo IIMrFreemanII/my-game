@@ -12,7 +12,6 @@ namespace MyGame.Weapons.Guns.Scripts
         [SerializeField] private Bullet bulletPrefab = null;
         public LayerMask layerToHit;
         public float maxDistToHit = 100f;
-        
 
         [SerializeField] private float fireRate = 1;
         private float TimeToFire => 1 / fireRate;

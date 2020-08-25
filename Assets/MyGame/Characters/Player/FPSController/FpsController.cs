@@ -1,5 +1,4 @@
-﻿using MyGame.Characters.Player.NewFPSController;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MyGame.Characters.Player.FPSController
 {

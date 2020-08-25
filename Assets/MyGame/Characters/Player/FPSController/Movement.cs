@@ -2,7 +2,7 @@
 using Extensions;
 using UnityEngine;
 
-namespace MyGame.Characters.Player.NewFPSController
+namespace MyGame.Characters.Player.FPSController
 {
     [Serializable]
     public class Movement
@@ -17,9 +17,6 @@ namespace MyGame.Characters.Player.NewFPSController
         
         [SerializeField] private float jumpForce = 12f;
         [SerializeField] [Range(0f, 1f)] private float groundCheckRadius = 0.05f;
-        
-        [SerializeField] [Range(0, 1)] private float counterMovementForce = 0.5f;
-        [SerializeField] [Range(0, 1)] private float counterMovementForceInAir = 0.025f;
         
         private bool IsGrounded
         {
@@ -51,45 +48,19 @@ namespace MyGame.Characters.Player.NewFPSController
 
         public void UpdateMovement()
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-            
-            float absHorizontal = Mathf.Abs(horizontal);
-            float absVertical = Mathf.Abs(vertical);
-            bool inAir = _rb.velocity.y != 0;
-            
-            bool isHorizontalMove = absHorizontal > 0;
-            bool isVerticalMove = absVertical > 0;
-            bool isMoving = isHorizontalMove || isVerticalMove;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
-            if (isMoving)
-            {
-                Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
+            Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
                 
-                // desired move direction relative to the current rotation
-                // to get direction relative to the current rotation:
-                // 1. transform.rotation * moveDir;
-                // or
-                // 2. transform.TransformDirection(moveDir);
-                Vector3 movement = (_character.rotation * moveDir) * walkSpeed;
-                _rb.velocity = movement.With(y: _rb.velocity.y); 
-            }
+            // desired move direction relative to the current rotation
+            // to get direction relative to the current rotation:
+            // 1. transform.rotation * moveDir;
+            // or
+            // 2. transform.TransformDirection(moveDir);
+            Vector3 movement = (_character.rotation * moveDir) * walkSpeed;
+            _rb.velocity = movement.With(y: _rb.velocity.y); 
             
-            void CounterMove()
-            {
-                if (!isMoving && IsGrounded)
-                {
-                    _rb.velocity = Vector3.Lerp(_rb.velocity, Vector3.zero, counterMovementForce).With(y: _rb.velocity.y);
-                }
-
-                if (inAir)
-                {
-                    _rb.velocity = Vector3.Lerp(_rb.velocity, Vector3.zero, counterMovementForceInAir)
-                        .With(y: _rb.velocity.y);
-                }
-            }
-
-            CounterMove();
             HandleJump();
         }
         

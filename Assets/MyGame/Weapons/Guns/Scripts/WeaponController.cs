@@ -1,4 +1,5 @@
-﻿using Extensions;
+﻿using System;
+using Extensions;
 using MyGame.Weapons.Scripts;
 using UnityEngine;
 
@@ -10,6 +11,31 @@ namespace MyGame.Weapons.Guns.Scripts
         
         [SerializeField] private Weapon[] weaponSlots = new Weapon[3];
         [SerializeField] private Weapon currentWeapon = null;
+
+        public Weapon CurrentWeapon
+        {
+            get => currentWeapon;
+            set
+            {
+                if (currentWeapon)
+                {
+                    WeaponSway oldWeaponSway = currentWeapon.GetComponent<WeaponSway>();
+                    if (oldWeaponSway)
+                    {
+                        oldWeaponSway.weaponSway = false;
+                    }
+                }
+                
+                WeaponSway newWeaponSway = value.GetComponent<WeaponSway>();
+                if (newWeaponSway)
+                {
+                    newWeaponSway.weaponSway = true;
+                }
+
+                currentWeapon = value;
+            }
+        }
+
         [SerializeField] private int _activeSlotIndex;
         
         [SerializeField] private LayerMask weaponLayer = default;
@@ -45,9 +71,9 @@ namespace MyGame.Weapons.Guns.Scripts
 
         private void HandleFire()
         {
-            if (currentWeapon)
+            if (CurrentWeapon)
             {
-                currentWeapon.HandleFire();
+                CurrentWeapon.HandleFire();
             }
         }
 
@@ -59,18 +85,18 @@ namespace MyGame.Weapons.Guns.Scripts
             if (!tempWeapon)
             {
                 Debug.LogWarning("Empty slot");
-                if (currentWeapon)
+                if (CurrentWeapon)
                 {
-                    currentWeapon.gameObject.SetActive(false);
-                    currentWeapon = null;
+                    CurrentWeapon.gameObject.SetActive(false);
+                    CurrentWeapon = null;
                 }
                 
                 return;
             }
             
-            if (currentWeapon) currentWeapon.gameObject.SetActive(false);
-            currentWeapon = tempWeapon;
-            currentWeapon.gameObject.SetActive(true);
+            if (CurrentWeapon) CurrentWeapon.gameObject.SetActive(false);
+            CurrentWeapon = tempWeapon;
+            CurrentWeapon.gameObject.SetActive(true);
         }
 
         private void HandleGrabWeapon()
@@ -97,7 +123,7 @@ namespace MyGame.Weapons.Guns.Scripts
                         
                         AddWeaponToSlot(weapon, freeSlot);
 
-                        if (currentWeapon == null && freeSlot == _activeSlotIndex)
+                        if (CurrentWeapon == null && freeSlot == _activeSlotIndex)
                         {
                             SwitchToSlot(_activeSlotIndex);
                         }
@@ -133,7 +159,7 @@ namespace MyGame.Weapons.Guns.Scripts
         private void DropCurrentWeapon()
         {
             DropWeapon(_activeSlotIndex);
-            currentWeapon = null;
+            CurrentWeapon = null;
         }
 
         private void AddWeaponToSlot(Weapon weapon, int slotIndex)
