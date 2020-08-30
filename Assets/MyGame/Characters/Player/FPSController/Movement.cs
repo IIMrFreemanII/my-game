@@ -11,6 +11,7 @@ namespace MyGame.Characters.Player.FPSController
         public float movementSmoothness = 0.125f;
         
         public float walkSpeed = 5f;
+        public float runSpeed = 10f;
         
         private CapsuleCollider _capsuleCollider = null;
         private Rigidbody _rb = null;
@@ -55,6 +56,7 @@ namespace MyGame.Characters.Player.FPSController
         {
             float horizontal = FpsInput.Horizontal;
             float vertical = FpsInput.Vertical;
+            float speed = FpsInput.Run ? runSpeed : walkSpeed;
 
             Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
                 
@@ -63,7 +65,7 @@ namespace MyGame.Characters.Player.FPSController
             // 1. transform.rotation * moveDir;
             // or
             // 2. transform.TransformDirection(moveDir);
-            Vector3 movement = (_character.rotation * moveDir) * walkSpeed;
+            Vector3 movement = (_character.rotation * moveDir) * speed;
             Vector3 smoothMovement = _smoothVelocityVector.Update(movement, movementSmoothness);
 
             _rb.velocity = smoothMovement.With(y: _rb.velocity.y);
