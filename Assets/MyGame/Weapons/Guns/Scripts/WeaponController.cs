@@ -1,5 +1,4 @@
-﻿using System;
-using Extensions;
+﻿using Extensions;
 using MyGame.Weapons.Scripts;
 using UnityEngine;
 
@@ -15,25 +14,7 @@ namespace MyGame.Weapons.Guns.Scripts
         public Weapon CurrentWeapon
         {
             get => currentWeapon;
-            set
-            {
-                if (currentWeapon)
-                {
-                    WeaponSway oldWeaponSway = currentWeapon.GetComponent<WeaponSway>();
-                    if (oldWeaponSway)
-                    {
-                        oldWeaponSway.weaponSway = false;
-                    }
-                }
-                
-                WeaponSway newWeaponSway = value.GetComponent<WeaponSway>();
-                if (newWeaponSway)
-                {
-                    newWeaponSway.weaponSway = true;
-                }
-
-                currentWeapon = value;
-            }
+            set => currentWeapon = value;
         }
 
         [SerializeField] private int _activeSlotIndex;

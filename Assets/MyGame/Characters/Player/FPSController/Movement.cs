@@ -10,7 +10,7 @@ namespace MyGame.Characters.Player.FPSController
         [Tooltip("Approximately the amount of time it will take for the player to reach maximum running or walking speed.")]
         public float movementSmoothness = 0.125f;
         
-        public float walkSpeed = 2f;
+        public float walkSpeed = 5f;
         
         private CapsuleCollider _capsuleCollider = null;
         private Rigidbody _rb = null;
@@ -23,7 +23,7 @@ namespace MyGame.Characters.Player.FPSController
         [SerializeField] private float jumpForce = 12f;
         [SerializeField] [Range(0f, 1f)] private float groundCheckRadius = 0.05f;
         
-        private bool IsGrounded
+        public bool IsGrounded
         {
             get
             {

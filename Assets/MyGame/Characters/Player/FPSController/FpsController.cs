@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MyGame.Weapons.Scripts;
+using UnityEngine;
 
 namespace MyGame.Characters.Player.FPSController
 {
@@ -8,6 +9,9 @@ namespace MyGame.Characters.Player.FPSController
         
         [SerializeField] private MouseLook mouseLook = new MouseLook();
         [SerializeField] private Movement movement = new Movement();
+        [SerializeField] private HeadBob headBob = new HeadBob();
+        [SerializeField] private HandsBob handsBob = new HandsBob();
+        [SerializeField] private BobStepCounter bobStepCounter = new BobStepCounter();
 
         private void Start()
         {
@@ -15,6 +19,8 @@ namespace MyGame.Characters.Player.FPSController
             
             mouseLook.Init(transform, camera.transform);
             movement.Init(transform);
+            headBob.Init(transform, camera.transform);
+            bobStepCounter.Init(transform);
         }
 
         private void Update()
@@ -24,12 +30,24 @@ namespace MyGame.Characters.Player.FPSController
 
         private void FixedUpdate()
         {
+            bobStepCounter.Update(movement.IsGrounded);
             movement.UpdateMovement();
+            headBob.Update(bobStepCounter.Count);
+            handsBob.Update(bobStepCounter.Count);
         }
 
         private void RotateView()
         {
             mouseLook.LookRotation(transform, camera.transform);
         }
+
+        // private void OnCollisionEnter(Collision collision)
+        // {
+        //     float yImpulse = collision.impulse.y;
+        //     if (yImpulse > 1)
+        //     {
+        //         Debug.Log(yImpulse);
+        //     }
+        // }
     }
 }
