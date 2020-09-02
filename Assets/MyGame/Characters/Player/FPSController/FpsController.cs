@@ -1,8 +1,8 @@
-﻿using MyGame.Weapons.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MyGame.Characters.Player.FPSController
 {
+    [RequireComponent(typeof (AudioSource))]
     public class FpsController : MonoBehaviour
     {
         [SerializeField] private new Camera camera;
@@ -26,14 +26,14 @@ namespace MyGame.Characters.Player.FPSController
         private void Update()
         {
             RotateView();
+            headBob.Update(bobStepCounter.Count);
+            handsBob.Update(bobStepCounter.Count);
         }
 
         private void FixedUpdate()
         {
-            bobStepCounter.Update(movement.IsGrounded);
-            movement.UpdateMovement();
-            headBob.Update(bobStepCounter.Count);
-            handsBob.Update(bobStepCounter.Count);
+            bobStepCounter.FixedUpdate(movement.IsGrounded);
+            movement.FixedUpdate(headBob.CameraYStep);
         }
 
         private void RotateView()

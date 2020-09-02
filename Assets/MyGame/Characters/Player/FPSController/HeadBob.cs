@@ -13,7 +13,12 @@ namespace MyGame.Characters.Player.FPSController
         
         private Transform _parent;
         private Transform _camera;
-    
+        private float _cameraYStep;
+        private float _cameraXStep;
+        
+        public float CameraYStep => _cameraYStep;
+        public float CameraXStep => _cameraXStep;
+
         public void Init(Transform parent, Transform camera)
         {
             _parent = parent;
@@ -22,9 +27,12 @@ namespace MyGame.Characters.Player.FPSController
 
         public void Update(float bobStep)
         {
+            _cameraXStep = Mathf.Sin(bobStep);
+            _cameraYStep = Mathf.Cos(bobStep * 2);
+
             Vector3 cameraLocalPosition = _camera.localPosition;
-            cameraLocalPosition.x = Mathf.Sin(bobStep) * headBobAmountX * currentAimRacio;
-            cameraLocalPosition.y = (Mathf.Cos(bobStep * 2) * headBobAmountY * currentAimRacio) +
+            cameraLocalPosition.x = _cameraXStep * headBobAmountX * currentAimRacio;
+            cameraLocalPosition.y = (_cameraYStep * headBobAmountY * currentAimRacio) +
                 (_parent.localScale.y * eyeHeightRacio) - (_parent.localScale.y / 2);
 
             _camera.localPosition = cameraLocalPosition;

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6712dd7c205742f79cfe9e3ae00a1fb3, type: 3}
+  m_Name: VSS_SO
+  m_EditorClassIdentifier: 
+  shoot: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+  takeOut: {fileID: 0}
+  holster: {fileID: 0}
+  muzzleFlash: {fileID: 1759345168244536658, guid: b640b0c221baf1f4ab58185617aaef2f,
+    type: 3}
+  bullet: {fileID: 8185881400368746091, guid: 5f35b33490f741941829d4be1bc4cb32, type: 3}

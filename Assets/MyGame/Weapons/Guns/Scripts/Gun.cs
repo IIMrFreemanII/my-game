@@ -1,15 +1,19 @@
 ﻿using System.Collections;
+using MyGame.Weapons.Guns.ScriptableObjects;
 using MyGame.Weapons.Projectiles.Scripts;
 using MyGame.Weapons.Scripts;
 using UnityEngine;
 
 namespace MyGame.Weapons.Guns.Scripts
 {
+    [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
     public class Gun : Weapon
     {
+        [SerializeField] private GunSO gunSO = null;
+        [SerializeField] private AudioSource audioSource = null;
+        
         [SerializeField] private new Camera camera = null;
-        [SerializeField] private Transform firePositionTransform = null;
-        [SerializeField] private Bullet bulletPrefab = null;
+        [SerializeField] private Transform firePosition = null;
         public LayerMask layerToHit;
         public float maxDistToHit = 100f;
 
@@ -23,6 +27,7 @@ namespace MyGame.Weapons.Guns.Scripts
             camera = camera ? camera : Camera.main;
             collider = collider ? collider : GetComponent<Collider>();
             rb = rb ? rb : GetComponent<Rigidbody>();
+            audioSource = audioSource ? audioSource : GetComponent<AudioSource>();
 
             SetUpCursor();
         }
@@ -60,6 +65,18 @@ namespace MyGame.Weapons.Guns.Scripts
         private void Fire()
         {
             CreateBullet();
+            audioSource.PlayOneShot(gunSO.shoot);
+            SpawnMuzzleFlash();
+        }
+
+        private void SpawnMuzzleFlash()
+        {
+            Vector3 spawnPosition = firePosition.position;
+            Quaternion spawnRotation = transform.rotation;
+            GameObject muzzleFlash = Instantiate(gunSO.muzzleFlash, spawnPosition, spawnRotation, firePosition);
+            
+            ParticleHandler particleHandler = muzzleFlash.GetComponent<ParticleHandler>();
+            particleHandler.Play();
         }
 
         private IEnumerator FireCoroutine()
@@ -73,11 +90,14 @@ namespace MyGame.Weapons.Guns.Scripts
 
         private void CreateBullet()
         {
-            Vector3 spawnPosition = firePositionTransform.position;
+            Vector3 spawnPosition = firePosition.position;
             Quaternion spawnRotation = Quaternion.LookRotation(GetDirToTarget());
 
-            Bullet bullet = Instantiate(bulletPrefab, spawnPosition, spawnRotation);
+            Bullet bullet = Instantiate(gunSO.bullet, spawnPosition, spawnRotation);
             bullet.Initialize(owner);
+
+            ParticleHandler particleHandler = bullet.GetComponent<ParticleHandler>();
+            particleHandler.Play();
         }
 
         private Vector3 GetDirToTarget()
@@ -87,7 +107,7 @@ namespace MyGame.Weapons.Guns.Scripts
             
             if (Physics.Raycast(camPos, camForwardDir, out RaycastHit hit, maxDistToHit, layerToHit))
             {
-                Vector3 dirToTarget = (hit.point - firePositionTransform.position).normalized;
+                Vector3 dirToTarget = (hit.point - firePosition.position).normalized;
                 return dirToTarget;
             }
             

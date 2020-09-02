@@ -21,7 +21,7 @@ namespace MyGame.Characters.Player.FPSController
             _parent = parent;
         }
 
-        public void Update(bool grounded)
+        public void FixedUpdate(bool grounded)
         {
             if (grounded)
             {

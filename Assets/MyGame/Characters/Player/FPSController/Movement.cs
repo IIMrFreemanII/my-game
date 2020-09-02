@@ -1,6 +1,7 @@
 ﻿using System;
 using Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MyGame.Characters.Player.FPSController
 {
@@ -16,14 +17,18 @@ namespace MyGame.Characters.Player.FPSController
         private CapsuleCollider _capsuleCollider = null;
         private Rigidbody _rb = null;
         private Transform _character;
-
         private SmoothVelocityVector _smoothVelocityVector = new SmoothVelocityVector();
 
         [SerializeField] private LayerMask jumpGroundLayer = default;
         
         [SerializeField] private float jumpForce = 12f;
         [SerializeField] [Range(0f, 1f)] private float groundCheckRadius = 0.05f;
-        
+
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip[] footstepSounds = null;
+        [SerializeField] private AudioClip jumpSound = null;
+        [SerializeField] private AudioClip landSound = null;
+
         public bool IsGrounded
         {
             get
@@ -42,9 +47,10 @@ namespace MyGame.Characters.Player.FPSController
             _character = character;
             _rb = character.GetComponent<Rigidbody>();
             _capsuleCollider = character.GetComponent<CapsuleCollider>();
-            
+            audioSource = character.GetComponent<AudioSource>();
+
             _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
-                             RigidbodyConstraints.FreezeRotationY;
+                              RigidbodyConstraints.FreezeRotationY;
             
             if (jumpGroundLayer == character.gameObject.layer)
             {
@@ -52,7 +58,7 @@ namespace MyGame.Characters.Player.FPSController
             }
         }
 
-        public void UpdateMovement()
+        public void FixedUpdate(float cameraYStep)
         {
             float horizontal = FpsInput.Horizontal;
             float vertical = FpsInput.Vertical;
@@ -71,13 +77,40 @@ namespace MyGame.Characters.Player.FPSController
             _rb.velocity = smoothMovement.With(y: _rb.velocity.y);
             
             HandleJump();
+            
+            HandleStepSound(cameraYStep, speed);
         }
-        
-        private void HandleJump()
+
+        private bool _playStepSound;
+        public void HandleStepSound(float cameraYStep, float speed)
         {
-            if (IsGrounded && FpsInput.Jump)
+            float currentStepCycle = cameraYStep * speed;
+
+            if (currentStepCycle < -speed * 0.95f && !_playStepSound)
+            {
+                _playStepSound = true;
+                
+                AudioClip randomStepSound = footstepSounds[Random.Range(0, footstepSounds.Length - 1)];
+                audioSource.PlayOneShot(randomStepSound);
+            } else if (currentStepCycle > speed * 0.95f)
+            {
+                _playStepSound = false;
+            }
+        }
+
+        private bool _inAir;
+        public void HandleJump()
+        {
+            if (IsGrounded && FpsInput.Jump && !_inAir)
             {
                 _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                
+                audioSource.PlayOneShot(jumpSound);
+                _inAir = true;
+            } else if (IsGrounded && _inAir && _rb.velocity.y == 0)
+            {
+                _inAir = false;
+                audioSource.PlayOneShot(landSound);
             }
         }
         
