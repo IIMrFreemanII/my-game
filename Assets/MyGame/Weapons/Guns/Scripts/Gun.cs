@@ -11,7 +11,9 @@ namespace MyGame.Weapons.Guns.Scripts
     {
         [SerializeField] private GunSO gunSO = null;
         [SerializeField] private AudioSource audioSource = null;
-        
+        [SerializeField] private CameraFireRecoil cameraFireRecoil = new CameraFireRecoil();
+        [SerializeField] private GunFireRecoil gunFireRecoil = new GunFireRecoil();
+
         [SerializeField] private new Camera camera = null;
         [SerializeField] private Transform firePosition = null;
         public LayerMask layerToHit;
@@ -28,6 +30,8 @@ namespace MyGame.Weapons.Guns.Scripts
             collider = collider ? collider : GetComponent<Collider>();
             rb = rb ? rb : GetComponent<Rigidbody>();
             audioSource = audioSource ? audioSource : GetComponent<AudioSource>();
+            cameraFireRecoil.Init(camera.transform);
+            gunFireRecoil.Init(transform);
 
             SetUpCursor();
         }
@@ -60,6 +64,9 @@ namespace MyGame.Weapons.Guns.Scripts
                     _fireCoroutine = null;
                 }
             }
+            
+            cameraFireRecoil.Update();
+            gunFireRecoil.Update();
         }
 
         private void Fire()
@@ -67,6 +74,9 @@ namespace MyGame.Weapons.Guns.Scripts
             CreateBullet();
             audioSource.PlayOneShot(gunSO.shoot);
             SpawnMuzzleFlash();
+            
+            cameraFireRecoil.Recoil();
+            gunFireRecoil.Recoil();
         }
 
         private void SpawnMuzzleFlash()
