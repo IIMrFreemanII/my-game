@@ -7,6 +7,9 @@ namespace MyGame.Characters.Player.FPSController
     [Serializable]
     public class HandsBob
     {
+        [Header("Aim calibration")]
+        [SerializeField] private bool aim = false;
+        
         [SerializeField] private Transform hands = null;
         [SerializeField] private float bobWalkAmountX = 0.01f;
         [SerializeField] private float bobWalkAmountY = 0.005f;
@@ -18,13 +21,15 @@ namespace MyGame.Characters.Player.FPSController
 
         public void Update(float bobStep)
         {
+            bool aiming = aim ? aim : FpsInput.Aim;
+            
             float bobAmountX = FpsInput.Run ? bobRunAmountX : bobWalkAmountX;
             float bobAmountY = FpsInput.Run ? bobRunAmountY : bobWalkAmountY;
             
             _currentHandBobX = Mathf.Sin(bobStep) * bobAmountX * racioHipHold;
             _currentHandBobY = Mathf.Cos(bobStep * 2) * bobAmountY * -1 * racioHipHold;
 
-            hands.localPosition = hands.localPosition.With(_currentHandBobX, _currentHandBobY);
+            hands.localPosition = aiming ? Vector3.zero : hands.localPosition.With(_currentHandBobX, _currentHandBobY);
         }
     }
 }

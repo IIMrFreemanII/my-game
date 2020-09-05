@@ -1,5 +1,6 @@
 ﻿using System;
 using Extensions;
+using MyGame.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -62,7 +63,7 @@ namespace MyGame.Characters.Player.FPSController
         {
             float horizontal = FpsInput.Horizontal;
             float vertical = FpsInput.Vertical;
-            float speed = FpsInput.Run ? runSpeed : walkSpeed;
+            float speed = FpsInput.Aim ? walkSpeed : FpsInput.Run ? runSpeed : walkSpeed;
 
             Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
                 
@@ -111,24 +112,6 @@ namespace MyGame.Characters.Player.FPSController
             {
                 _inAir = false;
                 audioSource.PlayOneShot(landSound);
-            }
-        }
-        
-        /// A helper for assistance with smoothing the movement.
-        private class SmoothVelocityVector
-        {
-            private Vector3 _current;
-            private Vector3 _currentVelocity;
-
-            /// Returns the smoothed velocity.
-            public Vector3 Update(Vector3 target, float smoothTime)
-            {
-                return _current = Vector3.SmoothDamp(_current, target, ref _currentVelocity, smoothTime);
-            }
-
-            public Vector3 Current
-            {
-                set { _current = value; }
             }
         }
     }

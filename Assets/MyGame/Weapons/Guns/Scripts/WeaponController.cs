@@ -14,7 +14,19 @@ namespace MyGame.Weapons.Guns.Scripts
         public Weapon CurrentWeapon
         {
             get => currentWeapon;
-            set => currentWeapon = value;
+            set
+            {
+                if (currentWeapon)
+                {
+                    currentWeapon.SetLayer(LayerMask.NameToLayer("Default"));
+                }
+                currentWeapon = value;
+
+                if (currentWeapon)
+                {
+                    currentWeapon.SetLayer(LayerMask.NameToLayer("Fps"));
+                }
+            }
         }
 
         [SerializeField] private int _activeSlotIndex;

@@ -1,4 +1,6 @@
 ﻿using System;
+using MyGame.Characters.Player.FPSController;
+using MyGame.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,19 +9,28 @@ namespace MyGame.Weapons.Guns.Scripts
     [Serializable]
     public class GunFireRecoil
     {
-        [Header("Speed settings")]
-        [SerializeField] private float positionRecoilSpeed = 8f;
-        [SerializeField] private float rotationRecoilSpeed = 8f;
-        [SerializeField] private float positionReturnSpeed = 18f;
-        [SerializeField] private float rotationReturnSpeed = 38f;
-        
-        [Header("Amount settings")]
-        [SerializeField] private Vector3 recoilAmountRotation = new Vector3(10f, 5f, 7f);
+        [Header("Debug")]
+        [SerializeField] private bool aimDebug = false;
+
+        [Header("Weapon positions")] 
+        [SerializeField] private Vector3 defaultPosition = Vector3.zero;
+        [SerializeField] private Vector3 aimPosition = Vector3.zero;
+
+        [Header("Time settings")] 
+        [SerializeField] private float positionRecoilTime = 0.1f;
+        [SerializeField] private float positionReturnRecoilTime = 0.05f;
+        [SerializeField] private float rotationRecoilTime = 0.1f;
+        [SerializeField] private float rotationReturnRecoilTime = 0.05f;
+
+        [Header("Amount settings")] 
+        [SerializeField] private Vector3 recoilAmountRotation = new Vector3(5f, 2f, 4f);
         [SerializeField] private Vector3 recoilKickBack = new Vector3(0.015f, 0f, -0.2f);
-        
-        private Vector3 _currentRotationRecoil;
-        private Vector3 _currentPositionRecoil;
-        private Vector3 _rotation;
+
+        private SmoothVelocityVector _currentRotationRecoil = new SmoothVelocityVector();
+        private SmoothVelocityVector _localRotation = new SmoothVelocityVector();
+        private SmoothVelocityVector _currentPositionRecoil = new SmoothVelocityVector();
+        private SmoothVelocityVector _localPosition = new SmoothVelocityVector();
+
         private Transform _transform;
 
         public void Init(Transform transform)
@@ -29,15 +40,15 @@ namespace MyGame.Weapons.Guns.Scripts
 
         public void Update()
         {
-            _currentRotationRecoil =
-                Vector3.Slerp(_currentRotationRecoil, Vector3.zero, rotationReturnSpeed * Time.deltaTime);
-            _currentPositionRecoil =
-                Vector3.Slerp(_currentPositionRecoil, Vector3.zero, positionReturnSpeed * Time.deltaTime);
+            bool aim = aimDebug ? aimDebug : FpsInput.Aim;
+            Vector3 initialPosition = aim ? aimPosition : defaultPosition;
 
-            _transform.localPosition = Vector3.Slerp(_transform.localPosition, _currentPositionRecoil,
-                positionRecoilSpeed * Time.deltaTime);
-            _rotation = Vector3.Slerp(_rotation, _currentRotationRecoil, rotationRecoilSpeed * Time.deltaTime);
-            _transform.localRotation = Quaternion.Euler(_rotation);
+            Vector3 currentRotationRecoil = _currentRotationRecoil.Update(Vector3.zero, rotationReturnRecoilTime);
+            Vector3 localRotation = _localRotation.Update(currentRotationRecoil, rotationRecoilTime);
+            _transform.localRotation = Quaternion.Euler(localRotation);
+
+            Vector3 currentPositionRecoil = _currentPositionRecoil.Update(initialPosition, positionReturnRecoilTime);
+            _transform.localPosition = _localPosition.Update(currentPositionRecoil, positionRecoilTime);
         }
 
         public void Recoil()
@@ -45,12 +56,12 @@ namespace MyGame.Weapons.Guns.Scripts
             float posX = Random.Range(-recoilKickBack.x, recoilKickBack.x);
             float posY = Random.Range(-recoilKickBack.y, recoilKickBack.y);
             float posZ = recoilKickBack.z;
-            _currentPositionRecoil += new Vector3(posX, posY, posZ);
-            
+            _currentPositionRecoil.Current += new Vector3(posX, posY, posZ);
+
             float rotX = -recoilAmountRotation.x;
             float rotY = Random.Range(-recoilAmountRotation.y, recoilAmountRotation.y);
             float rotZ = Random.Range(-recoilAmountRotation.z, recoilAmountRotation.z);
-            _currentRotationRecoil += new Vector3(rotX, rotY, rotZ);
+            _currentRotationRecoil.Current += new Vector3(rotX, rotY, rotZ);
         }
     }
 }

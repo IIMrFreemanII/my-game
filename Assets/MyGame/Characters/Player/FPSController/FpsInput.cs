@@ -12,5 +12,6 @@ namespace MyGame.Characters.Player.FPSController
 
         public static bool Run => Input.GetButton("Fire3");
         public static bool Jump => Input.GetButton("Jump");
+        public static bool Aim => Input.GetMouseButton(1);
     }
 }
